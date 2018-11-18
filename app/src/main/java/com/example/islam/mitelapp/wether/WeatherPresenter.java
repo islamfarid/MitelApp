@@ -121,7 +121,6 @@ public class WeatherPresenter implements WeatherContract.Presenter {
 
     @Override
     public void onSwipeToRefresh() {
-        mView.showLoading();
         EspressoIdlingResource.increment();
         mSubscriptions.add(mWeatherBusiness.onSwipeRefresh().observeOn(AndroidSchedulers.
                 mainThread()).subscribeOn(Schedulers.io()).doOnTerminate(() -> {
@@ -133,11 +132,16 @@ public class WeatherPresenter implements WeatherContract.Presenter {
             mView.showSelectedLocationsScenarion();
             mView.hideNoLocationsSelectedScenario();
             mView.hideSearchScenario();
-            mView.hideLoading();
         }, throwable -> {
-            mView.hideLoading();
             mView.showError(throwable.getMessage());
         }));
+    }
+
+    @Override
+    public void onMenuCollapsed() {
+        mView.showSelectedLocationsScenarion();
+        mView.hideSearchList();
+        mView.hideNoLocationsSelectedScenario();
     }
 
 

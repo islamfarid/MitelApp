@@ -155,6 +155,11 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
     }
 
     @Override
+    public void hideSearchList() {
+        mSearchedLocationsList.setVisibility(View.GONE);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_toolbar, menu);
         mSearch = menu.findItem(R.id.action_search);
@@ -169,6 +174,8 @@ public class WeatherFragment extends BaseFragment implements WeatherContract.Vie
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                ((WeatherContract.Presenter) mPresenter).onMenuCollapsed();
+
                 return true;
             }
         });

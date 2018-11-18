@@ -19,6 +19,7 @@ public interface WeatherContract {
         void showNoLcationsSelectedScenario();
         void hideNoLocationsSelectedScenario();
 
+        void hideSearchList();
     }
 
     interface Presenter extends BasePresenter {
@@ -29,5 +30,7 @@ public interface WeatherContract {
         void onItemsChanged(ArrayList<CurrentWeatherModel> currentWeatherModels);
 
         void onSwipeToRefresh();
+
+        void onMenuCollapsed();
     }
 }
