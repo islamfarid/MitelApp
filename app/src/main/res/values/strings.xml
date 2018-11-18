@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MitelApp</string>
+    <string name="error_no_internet_connection">No Internet Connection</string>
+    <string name="error_general">opps some thing went wrong</string>
+    <string name="hint_select_location_from_search_area">No Location Selected \\n Kindly select Location from by clicking the search icon</string>
+    <string name="search">Search</string>
+    <string name="weather_condition_urlmCurrentWeatherModels">http:%s</string>
+    <string name="temp">%s C</string>
+</resources>
