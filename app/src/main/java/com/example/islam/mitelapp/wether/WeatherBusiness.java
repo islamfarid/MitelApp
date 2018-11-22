@@ -58,22 +58,26 @@ public class WeatherBusiness {
     }
 
     public Observable<ArrayList<CurrentWeatherModel>> onSwipeRefresh() {
-        ArrayList<Observable<CurrentWeatherModel>> observables = new ArrayList<>();
-        for (CurrentWeatherModel currentWeatherModel : mCurrentSelectedWeathLists) {
-            observables.add(getWeatherAsPerLocations(currentWeatherModel));
-        }
-        return Observable.zip(observables, objects -> {
-            if (objects != null && objects.length > 0) {
-                ArrayList<CurrentWeatherModel> currentWeatherModels = new ArrayList<>();
-                for (Object object : objects) {
-                    currentWeatherModels.add((CurrentWeatherModel) object);
-                }
-                mCurrentSelectedWeathLists.clear();
-                mCurrentSelectedWeathLists.addAll(currentWeatherModels);
+        if(mCurrentSelectedWeathLists != null) {
+            ArrayList<Observable<CurrentWeatherModel>> observables = new ArrayList<>();
+            for (CurrentWeatherModel currentWeatherModel : mCurrentSelectedWeathLists) {
+                observables.add(getWeatherAsPerLocations(currentWeatherModel));
             }
-            mMitelRepository.setValue(Constants.WEATHER_DATA, new Gson().toJson(mCurrentSelectedWeathLists));
-            return mCurrentSelectedWeathLists;
-        });
+            return Observable.zip(observables, objects -> {
+                if (objects != null && objects.length > 0) {
+                    ArrayList<CurrentWeatherModel> currentWeatherModels = new ArrayList<>();
+                    for (Object object : objects) {
+                        currentWeatherModels.add((CurrentWeatherModel) object);
+                    }
+                    mCurrentSelectedWeathLists.clear();
+                    mCurrentSelectedWeathLists.addAll(currentWeatherModels);
+                }
+                mMitelRepository.setValue(Constants.WEATHER_DATA, new Gson().toJson(mCurrentSelectedWeathLists));
+                return mCurrentSelectedWeathLists;
+            });
+        }else {
+            return Observable.just(new ArrayList<>());
+        }
     }
 
     public ArrayList<CurrentWeatherModel> getmCurrentSelectedWeathLists() {
