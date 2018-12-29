@@ -8,6 +8,8 @@ import com.squareup.leakcanary.RefWatcher;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 
@@ -15,31 +17,23 @@ import dagger.android.HasActivityInjector;
  * Created by "Islam Farid" on 10/18/2018.
  */
 
-public class MitelAPP extends Application implements HasActivityInjector {
-//    MitelComponent mMitelComponent;
-
+public class MitelAPP extends DaggerApplication {
     RefWatcher mRefWatcher;
-    @Inject
-    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mRefWatcher = LeakCanary.install(this);
-        DaggerMitelComponent.builder()
-                .application(this)
-                .build().inject(this);
 
     }
-
     public void mustDie(Object object) {
         if (mRefWatcher != null) {
             mRefWatcher.watch(object);
         }
     }
-
-    @Override
-    public DispatchingAndroidInjector<Activity> activityInjector() {
-        return activityDispatchingAndroidInjector;
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        MitelComponent appComponent = DaggerMitelComponent.builder().application(this).build();
+        appComponent.inject(this);
+        return appComponent;
     }
 }
