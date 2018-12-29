@@ -8,12 +8,16 @@ import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
 
 /**
  * Created by "Islam Farid" on 10/18/2018.
  */
 @Singleton
-@Component(modules = {MitelModule.class})
+@Component(modules = {
+        AndroidInjectionModule.class,
+        MitelModule.class,
+        ActivityBuilder.class})
 public interface MitelComponent {
     MitelRepository getMitelRepository();
 
@@ -24,7 +28,6 @@ public interface MitelComponent {
 
         @BindsInstance
         Builder application(Application application);
-
         MitelComponent build();
     }
 }

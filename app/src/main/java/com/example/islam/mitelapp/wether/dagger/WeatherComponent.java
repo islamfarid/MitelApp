@@ -7,14 +7,16 @@ import com.example.islam.mitelapp.common.FragmentScoped;
 import com.example.islam.mitelapp.wether.WeatherActivity;
 
 import dagger.Component;
+import dagger.Subcomponent;
+import dagger.android.AndroidInjector;
 
 /**
  * Created by islam on 03/12/16.
  */
 
 @FragmentScoped
-@Component(dependencies = MitelComponent.class,
-        modules = WeatherModule.class)
-public interface WeatherComponent {
-    void inject(WeatherActivity weatherActivity);
+@Subcomponent(modules = WeatherModule.class)
+public interface WeatherComponent extends AndroidInjector<WeatherActivity>{
+    @Subcomponent.Builder
+    abstract class Builder extends AndroidInjector.Builder<WeatherActivity>{}
 }
