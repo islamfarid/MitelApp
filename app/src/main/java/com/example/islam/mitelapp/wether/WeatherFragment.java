@@ -19,8 +19,6 @@ import com.example.islam.mitelapp.data.models.LocationModel;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

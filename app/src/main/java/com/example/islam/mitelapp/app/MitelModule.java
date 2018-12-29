@@ -9,7 +9,6 @@ import com.example.islam.mitelapp.data.local.SharedPreference;
 import com.example.islam.mitelapp.data.local.SharedPreferenceImp;
 import com.example.islam.mitelapp.data.remote.MiletRemoteRepo;
 import com.example.islam.mitelapp.data.remote.ServiceGenerator;
-import com.example.islam.mitelapp.wether.dagger.WeatherComponent;
 
 import javax.inject.Singleton;
 
@@ -19,7 +18,7 @@ import dagger.Provides;
 /**
  * Created by "Islam Farid" on 10/18/2018.
  */
-@Module(subcomponents = {WeatherComponent.class})
+@Module
 public class MitelModule {
     @Provides
     @Singleton

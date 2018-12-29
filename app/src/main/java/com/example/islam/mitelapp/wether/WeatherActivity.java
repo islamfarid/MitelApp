@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.islam.mitelapp.R;
 import com.example.islam.mitelapp.app.BaseActivity;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
